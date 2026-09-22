@@ -1,0 +1,198 @@
+﻿@page
+@model IndexModel
+@* @{
+    Layout = null;
+    } *@
+
+@* @{
+    ViewData["Title"] = "Home page";
+    } *@
+
+<div class="form-container">
+
+    <h1>Анкета студента</h1>
+
+    <p class="description">
+        Введите свои данные
+    </p>
+
+    <form method="post">
+
+        <div class="form-group">
+            <label>Имя-фамилия:</label>
+            <input type="text" name="Name" placeholder="Введите имя" required>
+        </div>
+
+        <div class="form-group">
+            <label>Номер телефона:</label>
+            <input type="tel" name="Phone" placeholder="+7" required>
+        </div>
+
+        <div class="form-group">
+            <label>Email:</label>
+            <input type="email" name="Email" placeholder="email@example.com" required>
+        </div>
+
+        <div class="form-group">
+            <label>Специальность:</label>
+
+            <div class="speciality">
+
+                <input type="radio" name="Speciality" value="Программирование" id="dev">
+                <label for="dev">Программирование</label>
+
+                <br>
+
+                <input type="radio" name="Speciality" value="Дизайн" id="design">
+                <label for="design">Дизайн</label>
+
+                <br>
+
+                <input type="radio" name="Speciality" value="Маркетинг" id="marketing">
+                <label for="marketing">Маркетинг</label>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="courses">Курс:</label>
+            <select name="Course" id="courses">
+                <option value="1 курс">1 курс</option>
+                <option value="2 курс">2 курс</option>
+                <option value="3 курс">3 курс</option>
+                <option value="4 курс">4 курс</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="">Дата рождения:</label>
+            <input type="date" name="BirthDate" required>
+        </div>
+        <div class="form-group">
+            <label for="">Технологии:</label>
+            <div class="speciality">
+                <input type="checkbox" name="Technologies" value="HTML/CSS" id="html">
+                <label for="html">HTML/CSS</label>
+                <br>
+                <input type="checkbox" name="Technologies" value="JavaScript" id="js">
+                <label for="js">JavaScript</label>
+                <br>
+                <input type="checkbox" name="Technologies" value="C#" id="csharp">
+                <label for="csharp">C#</label>
+                <br>
+                <input type="checkbox" name="Technologies" value="Python" id="python">
+                <label for="python">Python</label>
+                <br>
+                <input type="checkbox" name="Technologies" value="PHP" id="php">
+                <label for="php">PHP</label>
+                <br>
+                <input type="checkbox" name="Technologies" value="Kotlin" id="kotlin">
+                <label for="kotlin">Kotlin</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="city">Город:</label>
+            <select name="City" id="city">
+                <option value="Сочи">Сочи</option>
+                <option value="Москва">Москва</option>
+                <option value="Краснодар">Краснодар</option>
+                <option value="Питер">Питер</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Основной язык программирования:</label>
+
+            <div class="lang">
+
+                <input type="radio" name="Lang" value="C++" id="c++">
+                <label for="c++">C++</label>
+
+                <br>
+
+                <input type="radio" name="Lang" value="C#" id="c#">
+                <label for="c#">C#</label>
+
+                <br>
+
+                <input type="radio" name="Lang" value="Java" id="java">
+                <label for="java">Java</label>
+
+                <br>
+
+                <input type="radio" name="Lang" value="Python" id="pyth">
+                <label for="pyth">Python</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Форма обучения:</label>
+
+            <div class="form-study">
+
+                <input type="radio" name="FormStudy" value="C++" id="och">
+                <label for="och">Очно</label>
+
+                <br>
+
+                <input type="radio" name="FormStudy" value="C#" id="zaoch">
+                <label for="zaoch">Заочно</label>
+
+                <br>
+
+                <input type="radio" name="FormStudy" value="Java" id="onl">
+                <label for="onl">Онлайн</label>
+
+                <br>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Введите информацию о вас:</label>
+            <input type="textarea" name="Info">
+        </div>
+
+        <button class="form-button" type="submit">
+            Отправить
+        </button>
+
+    </form>
+
+    <div id="result" class="result"></div>
+
+    @if (Model.Message != null)
+    {
+        <div class="result">
+            <h3>Данные анкеты:</h3>
+
+            <p style="white-space: pre-line;">
+                @Model.Message
+            </p>
+        </div>
+    }
+
+</div>
+
+<script>
+    const form = document.querySelector("form");
+
+    form.addEventListener("submit", async function (event){
+        event.preventDefault();
+
+        const button = form.querySelector("button");
+        button.textContent = "Отправка..."
+
+        const formData = new FormData(form);
+        const response = await fetch("", {
+            method: "POST",
+            body: formData
+        });
+
+        const result = await response.text();
+        console.log(result);
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        console.log(result); 
+
+        document.querySelector("#result").textContent = result;
+        button.disabled = false;
+        button.textContent = "Анкета отправлена (•_•)";
+    })
+</script>

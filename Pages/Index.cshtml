@@ -63,8 +63,8 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="">Дата рождения:</label>
-            <input type="date" name="BirthDate" required>
+            <label for="date">Дата рождения:</label>
+            <input type="date" name="BirthDate" required id="date">
         </div>
         <div class="form-group">
             <label for="">Технологии:</label>
@@ -156,7 +156,58 @@
 
     </form>
 
-    <div id="result" class="result"></div>
+    <div id="result" class="student-card">
+        <div class="student-card-header">
+            <h2>Анкета отправлена</h2>
+            <p>Данные студента</p>
+        </div>
+        <div class="student-info">
+            <div class="info-item">
+                <span>Имя</span>
+                <strong id="result-name"></strong>
+            </div>
+            <div class="info-item">
+                <span>Номер телефона</span>
+                <strong id="result-phone"></strong>
+            </div>
+            <div class="info-item">
+                <span>Email</span>
+                <strong id="result-email"></strong>
+            </div>
+            <div class="info-item">
+                <span>Специальность</span>
+                <strong id="result-speciality"></strong>
+            </div>
+            <div class="info-item">
+                <span>Курс</span>
+                <strong id="result-course"></strong>
+            </div>
+            <div class="info-item">
+                <span>Дата рождения</span>
+                <strong id="result-birthdate"></strong>
+            </div>
+            <div class="info-item">
+                <span>Технологии</span>
+                <strong id="result-technologies"></strong>
+            </div>
+            <div class="info-item">
+                <span>Город</span>
+                <strong id="result-city"></strong>
+            </div>
+            <div class="info-item">
+                <span>Основной язык программирования</span>
+                <strong id="result-lang"></strong>
+            </div>
+            <div class="info-item">
+                <span>Форма обучения</span>
+                <strong id="result-formstudy"></strong>
+            </div>
+            <div class="info-item">
+                <span>информация о вас</span>
+                <strong id="result-info"></strong>
+            </div>
+        </div>
+    </div>
 
     @if (Model.Message != null)
     {
@@ -178,21 +229,37 @@
         event.preventDefault();
 
         const button = form.querySelector("button");
-        button.textContent = "Отправка..."
-
         const formData = new FormData(form);
+        @* button.disabled = true; *@
+        @* button.textContent = "Отправка..." *@
+        @* console.log(button); 
+        console.log(form);  *@
+
+        @* const formData = new FormData(form); *@
         const response = await fetch("", {
             method: "POST",
             body: formData
         });
 
-        const result = await response.text();
-        console.log(result);
+        const data = await response.json();
         await new Promise(resolve => setTimeout(resolve, 1500));
-        console.log(result); 
 
-        document.querySelector("#result").textContent = result;
-        button.disabled = false;
+        document.querySelector("#result-name").textContent = data.Name;
+        document.querySelector("#result-phone").textContent = data.Phone;
+        document.querySelector("#result-email").textContent = data.Email;
+        document.querySelector("#result-speciality").textContent = data.Speciality;
+        document.querySelector("#result-course").textContent = data.Course;
+        document.querySelector("#result-birthdate").textContent = data.BirthDate;
+        document.querySelector("#result-technologies").textContent = data.Technologies;
+        document.querySelector("#result-city").textContent = data.City;
+        document.querySelector("#result-lang").textContent = data.Lang;
+        document.querySelector("#result-formstudy").textContent = data.FormStudy;
+        document.querySelector("#result-info").textContent = data.Info;
+        
+        console.log(data); 
+
+        document.querySelector("#result").style.display = "block";
+        @* button.disabled = false; *@
         button.textContent = "Анкета отправлена (•_•)";
     })
 </script>

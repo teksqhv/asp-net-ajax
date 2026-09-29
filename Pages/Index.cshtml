@@ -154,7 +154,13 @@
             Отправить
         </button>
 
+        <button class="clear-button" type="reset">
+            Очистить
+        </button>
+
     </form>
+
+    <div id="status" class="status"></div>
 
     <div id="result" class="student-card">
         <div class="student-card-header">
@@ -225,41 +231,57 @@
 <script>
     const form = document.querySelector("form");
 
-    form.addEventListener("submit", async function (event){
+    form.addEventListener("submit", async function (event) {
         event.preventDefault();
 
-        const button = form.querySelector("button");
+        const button = form.querySelector("button[type='submit']");
+        const status = document.querySelector('#status');
         const formData = new FormData(form);
-        @* button.disabled = true; *@
-        @* button.textContent = "Отправка..." *@
-        @* console.log(button); 
-        console.log(form);  *@
+        button.disabled = true;
+        button.textContent = "Отправка..."
 
-        @* const formData = new FormData(form); *@
-        const response = await fetch("", {
-            method: "POST",
-            body: formData
-        });
+        try {
+            const response = await fetch("", {
+                method: "POST",
+                body: formData
+            });
 
-        const data = await response.json();
-        await new Promise(resolve => setTimeout(resolve, 1500));
+            if (!response.ok) {
+                throw new Error('Ошибка отправки');
+            }
 
-        document.querySelector("#result-name").textContent = data.Name;
-        document.querySelector("#result-phone").textContent = data.Phone;
-        document.querySelector("#result-email").textContent = data.Email;
-        document.querySelector("#result-speciality").textContent = data.Speciality;
-        document.querySelector("#result-course").textContent = data.Course;
-        document.querySelector("#result-birthdate").textContent = data.BirthDate;
-        document.querySelector("#result-technologies").textContent = data.Technologies;
-        document.querySelector("#result-city").textContent = data.City;
-        document.querySelector("#result-lang").textContent = data.Lang;
-        document.querySelector("#result-formstudy").textContent = data.FormStudy;
-        document.querySelector("#result-info").textContent = data.Info;
-        
-        console.log(data); 
+            const data = await response.json();
+            await new Promise(resolve => setTimeout(resolve, 1500));
 
-        document.querySelector("#result").style.display = "block";
-        @* button.disabled = false; *@
-        button.textContent = "Анкета отправлена (•_•)";
-    })
+            document.querySelector("#result-name").textContent = data.Name;
+            document.querySelector("#result-phone").textContent = data.Phone;
+            document.querySelector("#result-email").textContent = data.Email;
+            document.querySelector("#result-speciality").textContent = data.Speciality;
+            document.querySelector("#result-course").textContent = data.Course;
+            document.querySelector("#result-birthdate").textContent = data.BirthDate;
+            document.querySelector("#result-technologies").textContent = data.Technologies;
+            document.querySelector("#result-city").textContent = data.City;
+            document.querySelector("#result-lang").textContent = data.Lang;
+            document.querySelector("#result-formstudy").textContent = data.FormStudy;
+            document.querySelector("#result-info").textContent = data.Info;
+
+            console.log(data);
+
+            document.querySelector("#result").style.display = "block";
+            button.disabled = false;
+            button.textContent = "Анкета отправлена (•_•)";
+        }
+        catch (error) {
+            status.textContent = "Не удалось отправить анкету";
+        } finally {
+            button.disabled = false;
+            button.textContent = "Отправить";
+        }
+    });
+
+
+    form.addEventListener("reset", function () {
+        document.querySelector("#result").style.display = "none";
+        document.querySelector("#status").textContent = ""
+    });
 </script>

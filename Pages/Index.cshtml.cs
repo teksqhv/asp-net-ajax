@@ -42,20 +42,8 @@ public class IndexModel : PageModel
             ? string.Join(", ", Technologies)
             : "Не выбраны";
 
-        // string message = $"Анкета студента\n\n" +
-        //         $"Имя: {Name}\n" + 
-        //         $"Телефон: {Phone}\n" +
-        //         $"Email: {Email}\n" +
-        //         $"Специальность: {Speciality}\n" +
-        //         $"Курс: {Course}\n" +
-        //         $"Дата рождения: {BirthDate}\n" +
-        //         $"Технологии: {technologies}\n" +
-        //         $"Город: {City}\n" +
-        //         $"Основной язык программирования: {Lang}\n" +
-        //         $"Форма обучения: {FormStudy}\n" +
-        //         $"Информация о вас: {Info}\n";
         var student = new Student {
-            Id = Students.Count + 1,
+            Id = Students.Any() ? Students.Max(x => x.Id) + 1 : 1,
             Name = Name,
             Phone = Phone,
             Email = Email,

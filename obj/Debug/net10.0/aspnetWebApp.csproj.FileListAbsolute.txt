@@ -192,15 +192,12 @@ C:\Users\teacher\Desktop\aspnetWebApp\obj\Debug\net10.0\aspnetWebApp.pdb
 C:\Users\teacher\Desktop\aspnetWebApp\obj\Debug\net10.0\aspnetWebApp.genruntimeconfig.cache
 C:\Users\teacher\Desktop\aspnetWebApp\obj\Debug\net10.0\ref\aspnetWebApp.dll
 C:\Users\teacher\Desktop\aspnetWebApp\obj\Debug\net10.0\compressed\2v9ug8irji-{0}-gnwncmguws-gnwncmguws.gz
+C:\Users\106010192\Desktop\aspnetWebApp\bin\Debug\net10.0\aspnetWebApp.exe
+C:\Users\106010192\Desktop\aspnetWebApp\bin\Debug\net10.0\aspnetWebApp.dll
 C:\Users\106010192\Desktop\aspnetWebApp\bin\Debug\net10.0\appsettings.Development.json
 C:\Users\106010192\Desktop\aspnetWebApp\bin\Debug\net10.0\appsettings.json
 C:\Users\106010192\Desktop\aspnetWebApp\bin\Debug\net10.0\aspnetWebApp.staticwebassets.runtime.json
 C:\Users\106010192\Desktop\aspnetWebApp\bin\Debug\net10.0\aspnetWebApp.staticwebassets.endpoints.json
-C:\Users\106010192\Desktop\aspnetWebApp\bin\Debug\net10.0\aspnetWebApp.exe
-C:\Users\106010192\Desktop\aspnetWebApp\bin\Debug\net10.0\aspnetWebApp.deps.json
-C:\Users\106010192\Desktop\aspnetWebApp\bin\Debug\net10.0\aspnetWebApp.runtimeconfig.json
-C:\Users\106010192\Desktop\aspnetWebApp\bin\Debug\net10.0\aspnetWebApp.dll
-C:\Users\106010192\Desktop\aspnetWebApp\bin\Debug\net10.0\aspnetWebApp.pdb
 C:\Users\106010192\Desktop\aspnetWebApp\obj\Debug\net10.0\rpswa.dswa.cache.json
 C:\Users\106010192\Desktop\aspnetWebApp\obj\Debug\net10.0\aspnetWebApp.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\106010192\Desktop\aspnetWebApp\obj\Debug\net10.0\aspnetWebApp.AssemblyInfoInputs.cache
@@ -209,6 +206,7 @@ C:\Users\106010192\Desktop\aspnetWebApp\obj\Debug\net10.0\aspnetWebApp.csproj.Co
 C:\Users\106010192\Desktop\aspnetWebApp\obj\Debug\net10.0\aspnetWebApp.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\106010192\Desktop\aspnetWebApp\obj\Debug\net10.0\aspnetWebApp.RazorAssemblyInfo.cache
 C:\Users\106010192\Desktop\aspnetWebApp\obj\Debug\net10.0\aspnetWebApp.RazorAssemblyInfo.cs
+C:\Users\106010192\Desktop\aspnetWebApp\obj\Debug\net10.0\aspnetWebApp.sourcelink.json
 C:\Users\106010192\Desktop\aspnetWebApp\obj\Debug\net10.0\rjimswa.dswa.cache.json
 C:\Users\106010192\Desktop\aspnetWebApp\obj\Debug\net10.0\rjsmrazor.dswa.cache.json
 C:\Users\106010192\Desktop\aspnetWebApp\obj\Debug\net10.0\rjsmcshtml.dswa.cache.json
@@ -286,7 +284,9 @@ C:\Users\106010192\Desktop\aspnetWebApp\obj\Debug\net10.0\swae.build.ex.cache
 C:\Users\106010192\Desktop\aspnetWebApp\obj\Debug\net10.0\aspnetWebApp.dll
 C:\Users\106010192\Desktop\aspnetWebApp\obj\Debug\net10.0\refint\aspnetWebApp.dll
 C:\Users\106010192\Desktop\aspnetWebApp\obj\Debug\net10.0\aspnetWebApp.pdb
+C:\Users\106010192\Desktop\aspnetWebApp\bin\Debug\net10.0\aspnetWebApp.deps.json
+C:\Users\106010192\Desktop\aspnetWebApp\bin\Debug\net10.0\aspnetWebApp.runtimeconfig.json
+C:\Users\106010192\Desktop\aspnetWebApp\bin\Debug\net10.0\aspnetWebApp.pdb
 C:\Users\106010192\Desktop\aspnetWebApp\obj\Debug\net10.0\aspnetWebApp.genruntimeconfig.cache
 C:\Users\106010192\Desktop\aspnetWebApp\obj\Debug\net10.0\ref\aspnetWebApp.dll
-C:\Users\106010192\Desktop\aspnetWebApp\obj\Debug\net10.0\aspnetWebApp.sourcelink.json
-C:\Users\106010192\Desktop\aspnetWebApp\obj\Debug\net10.0\compressed\2v9ug8irji-{0}-ten4mxplqi-ten4mxplqi.gz
+C:\Users\106010192\Desktop\aspnetWebApp\obj\Debug\net10.0\compressed\2v9ug8irji-{0}-0k94u33oze-0k94u33oze.gz

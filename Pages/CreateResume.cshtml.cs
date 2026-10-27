@@ -1,82 +1,27 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using aspnetWebApp.Models;
 
-
-namespace aspnetWebApp.Pages;
-
-
-public class CreateResumeModel : PageModel
+namespace aspnetWebApp.Pages
 {
-    [BindProperty]
-    public required string Name { get; set; }
-    [BindProperty]
-    public required string Phone { get; set; }
-    [BindProperty]
-    public required string Email { get; set; }
-    [BindProperty]
-    public required string Speciality { get; set; }
-    [BindProperty]
-    public required string Course { get; set; }
-    [BindProperty]
-    public required string BirthDate { get; set; }
-    [BindProperty]
-    public string[] Technologies { get; set; } = Array.Empty<string>();
-    public static List<Student> Students { get; set; } = new();
-    public required string Message { get; set; }
-    public void OnGet()
+    public class CreateResumeModel : PageModel
     {
-        // Message = "Привет! Сообщение от C#";
-    }
-    public IActionResult OnPost()
-    {
+        [BindProperty]
+        public Student NewStudent { get; set; } = new Student();
 
+        public void OnGet() { }
 
-        string technologies = Technologies.Length > 0
-            ? string.Join(", ", Technologies)
-            : "Не выбраны";
-
-
-        var student = new Student
+        public IActionResult OnPost()
         {
-            Id = Students.Any() ? Students.Max(x => x.Id) + 1 : 1,
-            Name = Name,
-            Phone = Phone,
-            Email = Email,
-            Speciality = Speciality,
-            Course = Course,
-            BirthDate = BirthDate,
-            Technologies = Technologies
-        };
-
-
-        Students.Add(student);
-
-
-        return new JsonResult(student);
-    }
-
-
-    public IActionResult OnGetStudents()
-    {
-        return new JsonResult(Students);
-    }
-    public IActionResult OnPostDelete(int id)
-    {
-        var student = Students.FirstOrDefault(x => x.Id == id);
-        if (student == null)
-        {
-            return new JsonResult(new
+            if (!ModelState.IsValid)
             {
-                success = false,
-                message = "Студент не найден"
-            });
+                return Page();
+            }
+
+            // Сохраняем данные в общий список
+            IndexModel.StudentsList.Add(NewStudent);
+
+            // Переходим в каталог, чтобы сразу увидеть результат
+            return RedirectToPage("/Resumes");
         }
-        Students.Remove(student);
-        return new JsonResult(new
-        {
-            success = true
-        });
     }
 }
-

@@ -1,57 +1,155 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - aspnetWebApp</title>
-    <script type="importmap"></script>
-    @* <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/aspnetWebApp.styles.css" asp-append-version="true" /> *@
+    <title>@ViewData["Title"] - CollegeJob</title>
+    
+    <!-- Подключаем красивый шрифт Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Базовые настройки, чтобы ничего не сбивалось */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #f8fafc; /* Светлый фон как на твоем скриншоте */
+            color: #111827;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Верхняя серая полоса */
+        .top-bar {
+            background-color: #f1f5f9;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 13px;
+            color: #64748b;
+            padding: 10px 0;
+        }
+        
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Белая шапка с меню */
+        .main-header {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 15px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .main-header .container {
+            display: flex;
+            justify-content: space-between; /* Логотип слева, меню справа */
+            align-items: center;
+        }
+
+        /* Логотип */
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: #4f46e5; /* Фиолетово-синий */
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        /* Контейнер меню */
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 8px; /* Расстояние между пунктами */
+        }
+
+        /* Пункты меню */
+        .nav-link {
+            text-decoration: none;
+            color: #4b5563; /* Темно-серый */
+            font-weight: 600;
+            font-size: 15px;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.2s ease-in-out; /* Плавная анимация */
+        }
+
+        /* Подсветка при наведении */
+        .nav-link:hover {
+            background-color: #e0e7ff; /* Светло-синий фон */
+            color: #4f46e5; /* Синий текст */
+        }
+
+        /* Основной контент */
+        main {
+            flex: 1;
+            padding: 40px 0;
+        }
+
+        /* Подвал */
+        footer {
+            background-color: #ffffff;
+            border-top: 1px solid #e2e8f0;
+            padding: 20px 0;
+            text-align: center;
+            color: #6b7280;
+            font-size: 14px;
+        }
+    </style>
+    
+    <!-- Твой файл стилей (для карточек) -->
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body>
-    @* <nav class="nav">
 
-    </nav> *@
+    <!-- Тонкая полоса сверху -->
+    <div class="top-bar">
+        <div class="container">
+            <span>Платформа для студентов и работодателей</span>
+            <span>support@collegejob.ru</span>
+        </div>
+    </div>
 
-    <header class="site-header">
-        <div class="header-container">
-            <a class="site-logo">
-                College<span>Job</span>
-            </a>
-            <nav class="site-nav">
-                <a asp-page="/Index">Главная</a>
-                <a asp-page="/Resumes">Каталог резюме</a>
-                <a asp-page="/CreateResume">Создать резюме</a>
-                <a asp-page="/About">О проекте</a>
+    <!-- Шапка -->
+    <header class="main-header">
+        <div class="container">
+            <!-- Логотип -->
+            <a asp-page="/Index" class="logo">CollegeJob</a>
+            
+            <!-- Меню (строго в линию) -->
+            <nav class="nav-menu">
+                <a asp-page="/Index" class="nav-link">Главная</a>
+                <a asp-page="/Resumes" class="nav-link">Каталог резюме</a>
+                <a asp-page="/CreateResume" class="nav-link">Создать резюме</a>
+                <a asp-page="/About" class="nav-link">О проекте</a>
             </nav>
         </div>
     </header>
 
-  
-        <main role="main" class="site-main">
+    <!-- Контент -->
+    <main>
+        <div class="container">
             @RenderBody()
-        </main>
+        </div>
+    </main>
 
-
-    <footer class="site-footer">
-        <div class="footer-container">
-            <a class="footer-logo">
-                College<span>Job</span>
-            </a>
-            <p>Платформа для старта профессиональной карьеры</p>
-            <span class="footer-copy">
-                @DateTime.Now.Year CollegeJob
-            </span>
+    <!-- Подвал -->
+    <footer>
+        <div class="container">
+            &copy; @DateTime.Now.Year - CollegeJob. Все права защищены.
         </div>
     </footer>
 
-
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-
-    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

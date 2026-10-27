@@ -1,15 +1,15 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using aspnetWebApp.Models;
 
-
-namespace aspnetWebApp.Pages;
-
-
-public class ResumesModel : PageModel
+namespace aspnetWebApp.Pages
 {
-    public List<Student> Students { get; set; } = new();
-    public void OnGet()
+    public class ResumesModel : PageModel
     {
-        Students = CreateResumeModel.Students;
+        public List<Student> Students { get; set; } = new();
+
+        public void OnGet()
+        {
+            // Берем данные из общего списка
+            Students = IndexModel.StudentsList;
+        }
     }
 }

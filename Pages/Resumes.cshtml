@@ -1,64 +1,55 @@
 @page
 @model ResumesModel
+@{
+    ViewData["Title"] = "Каталог резюме";
+}
 
-<div class="resumes-page">
-    <div class="resumes-heading">
-        <div>
-            <p class="home-label">
-                COLLEGEJOB
-            </p>
-            <h1>Каталог резюме</h1>
-            <p>Знакомься со специалистами и их навыками</p>
-        </div>
-
-        <a class="home-button" asp-page="/CreateResume">Создать резюме</a>
+<div style="text-align: left; display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem;">
+    <div>
+        <p style="font-size: 0.85rem; font-weight: 700; color: #4f46e5; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 0.5rem;">
+            COLLEGEJOB
+        </p>
+        <h1 style="font-size: 2.5rem; font-weight: 800; margin: 0 0 0.5rem 0;">Каталог резюме</h1>
+        <p style="color: #6b7280; font-size: 1.1rem; margin: 0;">Знакомься со специалистами</p>
     </div>
-
-    <p class="resumes-count">
-        Всего резюме: @Model.Students.Count
-    </p>
-
-    @if (Model.Students.Count == 0)
-    {
-        <div class="resume-empty">
-            <h2>Пока нет резюме :(</h2>
-            <p>Стань первым - заполни свою анкету</p>
-
-            <a asp-page="/CreateResume">
-                Создать первое резюме
-            </a>
-        </div>
-    }
-    else
-    {
-        <div class="resumes-gird">
-            @foreach (var student in Model.Students)
-            {   
-                <article class="resume-card">
-                    <p class="resume-speciality">
-                        @student.Speciality
-                    </p>
-                    <h2>@student.Name</h2>
-                    <p>@student.Course</p>
-                    <div class="resume-details">
-                        <p>
-                            <strong>Email:</strong>
-                            @student.Email
-                        </p>
-                        <p>
-                            <strong>Телефон:</strong>
-                            @student.Phone
-                        </p>
-                        <p>
-                            <strong>Технологии:</strong>
-                            @(student.Technologies.Length > 0
-                            ? string.Join(", ", student.Technologies) : "Не указаны")
-                        </p>
-                    </div>
-                </article>
-                
-            }
-
-        </div>
-    }
+    <a asp-page="/CreateResume" class="btn btn-primary" style="margin-bottom: 0.5rem;">Создать резюме</a>
 </div>
+
+<p style="color: #6b7280; margin-bottom: 2rem;">
+    Всего резюме: <strong>@Model.Students.Count</strong>
+</p>
+
+@if (Model.Students.Count == 0)
+{
+    <div class="resume-card" style="max-width: 600px; margin: 0 auto; text-align: center; padding: 3rem 2rem;">
+        <h2 style="margin-top: 0; font-size: 2rem;">Пока нет резюме</h2>
+        <p style="font-size: 1.1rem; margin-bottom: 2rem;">Стань первым — заполни свою анкету!</p>
+        <a asp-page="/CreateResume" class="btn btn-primary" style="padding: 0.8rem 2rem;">Создать резюме</a>
+    </div>
+}
+else
+{
+    <div class="resume-grid">
+        @foreach (var student in Model.Students)
+        {   
+            <div class="resume-card">
+                <div>
+                    <span class="badge badge-primary">@student.Speciality</span>
+                </div>
+                <h3 style="margin-top: 0.5rem;">@student.Name</h3>
+                <p style="margin-bottom: 1rem;"><strong>Курс:</strong> @student.Course | <strong>Город:</strong> @student.City</p>
+                
+                <div style="background: #f8fafc; padding: 1rem; border-radius: 8px; font-size: 0.9rem; margin-bottom: 1rem; flex-grow: 1;">
+                    <p style="margin: 0 0 0.5rem 0;"><strong>Email:</strong> @student.Email</p>
+                    <p style="margin: 0 0 0.5rem 0;"><strong>Телефон:</strong> @student.Phone</p>
+                    <p style="margin: 0;">
+                        <strong>Технологии:</strong> 
+                        @(student.Technologies != null && student.Technologies.Count > 0 
+                            ? string.Join(", ", student.Technologies) 
+                            : "Не выбраны")
+                    </p>
+                </div>
+            </div>
+        }
+    </div>
+}

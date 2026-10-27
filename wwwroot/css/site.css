@@ -1,240 +1,180 @@
-/* ОБЩИЕ СТИЛИ */
-html{
-    min-height: 100%;
+:root {
+    --color-primary: #4f46e5;
+    --color-primary-hover: #4338ca;
+    --color-primary-light: #e0e7ff;
+    --color-text: #111827;
+    --color-text-muted: #6b7280;
+    --color-bg: #f8fafc;
 }
+
+* { box-sizing: border-box; }
+
 body {
-    min-height: 100vh;
+    font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+    color: var(--color-text);
+    background: var(--color-bg);
     margin: 0;
     display: flex;
     flex-direction: column;
-    font-family: Arial, Helvetica, sans-serif;
-    color: #171717;
-    background: #f8f9fb;
+    min-height: 100vh;
 }
-.site-main{
-    flex: 1;
+
+.container {
     width: 100%;
-}
-
-
-/* HEADER */
-.site-header{
-    width: 100%;
-    background: #fff;
-    border-bottom: 1px solid #e9e9e9;
-}
-
-.header-container{
-    max-width: 1100px;
-    min-height: 80px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 30px;
 }
 
-.site-logo, .footer-logo {
-    color: #171717;
-    text-decoration: none;
-    font-size: 25px;
+/* Шапка */
+.flex-between {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    flex-direction: row !important;
+}
+.top-bar {
+    background: #f1f5f9;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    padding: 0.5rem 0;
+}
+.main-header {
+    background: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 1rem 0;
+}
+.navbar-brand {
     font-weight: 800;
-    letter-spacing: -1px;
-    white-space: nowrap;
-}
-
-.site-logo span, .footer-logo span{
-    color: #3563e9;
-}
-
-.site-nav {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 26px;
-}
-
-.site-nav a{
-    color: #555;
+    font-size: 1.5rem;
+    color: var(--color-primary) !important;
     text-decoration: none;
-    font-size: 16px;
-    font-weight: 400;
-    transition: color 0.2s ease;
+}
+.main-nav {
+    display: flex !important;
+    align-items: center !important;
+    gap: 1rem !important;
+}
+.main-nav .nav-link {
+    color: var(--color-text) !important;
+    text-decoration: none !important;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    white-space: nowrap !important;
+}
+.main-nav .nav-link:hover {
+    background-color: var(--color-primary-light);
+    color: var(--color-primary) !important;
 }
 
-.site-nav a:hover {
-    color: #3563e9;
+main {
+    flex: 1 0 auto;
+    padding: 2rem 0;
 }
 
-/* FOOTER */
-.site-footer{
-    margin-top: 60px;
-    background: #171717;
-    color: #fff;
+/* Сетка карточек */
+.resume-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
 }
-.footer-container{
-    max-width: 1100px;
-    min-height: 110px;
-    margin: 0 auto;
-    padding: 25px 20px;
+.resume-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 1.75rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.03);
+}
+.resume-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+}
+.resume-card h2, .resume-card h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+/* Бейджи */
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+.badge-primary { background: var(--color-primary-light); color: var(--color-primary); }
+
+/* Формы (Анкета) */
+.form-group { margin-bottom: 1.25rem; }
+.form-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+}
+.form-control {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    font-family: inherit;
+    color: var(--color-text);
+    background-color: #f9fafb;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+.form-control:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px var(--color-primary-light);
+}
+.form-check {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 18px;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
 }
-.footer-logo{
-    color: #fff;
-    font-size: 22px;
-}
-.footer-container p{
+.form-check-input {
+    width: 1.2rem;
+    height: 1.2rem;
+    accent-color: var(--color-primary);
+    cursor: pointer;
     margin: 0;
-    color: #b8b8b8;
-    font-size: 13px;
-    line-height: 1.5;
 }
-.footer-copy{
-    color: #929292;
-    font-size: 12px;
-}
+.form-check-label { cursor: pointer; }
 
-/* ФОРМА */
-
-.form-container {
-    max-width: 500px;
-    margin: 50px auto;
-    padding: 35px;
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 20px;
-}
-.form-container h1 {
-    margin-bottom: 10px;
-}
-
-.form-container p.description {
-    color: #666;
-    margin-bottom: 30px;
-}
-
-.form-group {
-    text-align: left;
-    margin-bottom: 20px;
-}
-
-.form-group label {
+/* Кнопки */
+.btn {
+    display: inline-block;
+    border-radius: 8px;
     font-weight: 600;
-}
-
-.form-group input[type="text"],
-.form-group input[type="tel"],
-.form-group input[type="email"],
-.form-group input[type="date"],
-.form-group select {
-    width: 100%;
-    height: 46px;
-    padding: 0 15px;
-    margin-top: 7px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-sizing: border-box;
-    font-size: 16px;
-    font-family: Arial, Helvetica, sans-serif;
-    background: #fff;
-    transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-/* .form-group input[type="text"],
-.form-group input[type="tel"],
-.form-group input[type="email"],
-.form-group input[type="date"],
-.form-group select {
-width: 100%;
-padding: 12px 15px;
-margin-top: 7px;
-border: 1px solid #ccc;
-border-radius: 10px;
-box-sizing: border-box;
-font-size: 16px;
-} */
-
-.form-group select {
-    padding-right: 20px;
-}
-
-.form-group input:focus {
-    outline: none;
-    border-color: #007bff;
-}
-
-.speciality {
-    margin-top: 10px;
-}
-
-.speciality label {
-    font-weight: normal;
-    margin-left: 5px;
-}
-
-.speciality input {
-    margin-bottom: 20px;
-}
-
-.form-button {
-    width: 100%;
-    padding: 13px;
+    padding: 0.6rem 1.5rem;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    text-align: center;
     border: none;
-    border-radius: 10px;
-    background: #007bff;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
+    text-decoration: none;
 }
+.btn-primary { background: var(--color-primary); color: white !important; }
+.btn-primary:hover { background: var(--color-primary-hover); }
+.btn-secondary { background: white; color: var(--color-text) !important; border: 1px solid #d1d5db; }
+.btn-secondary:hover { background: #f9fafb; }
 
-
-
-.form-button:hover {
-    background: #0056b3;
-}
-
-.clear-button {
-    width: 100%;
-    padding: 13px;
-    margin-top: 20px;
-    border: 1px solid #007bff;
-    border-radius: 10px;
-    background: white;
-    color: #007bff;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.clear-button:hover{
-    background: red;
-}
-
-/* .result {
-margin-top: 25px;
-padding: 20px;
-background: #f5f5f5;
-border-radius: 12px;
-text-align: left;
-white-space: pre-line;
-} */
-
-.student-card {
-    display: none;
-    margin-top: 25px;
-    padding: 20px;
-    background: #f5f5f5;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    text-align: left;
-}
-
-.student-card-header {
-    margin-bottom: 20px;
+footer {
+    background: #ffffff;
+    border-top: 1px solid #e2e8f0;
+    padding: 2rem 0;
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
 }

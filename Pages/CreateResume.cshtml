@@ -1,333 +1,132 @@
 @page
 @model CreateResumeModel
+@{
+    ViewData["Title"] = "Создать резюме";
+}
 
-<div class="form-container">
-
-    <h1>Анкета студента</h1>
-
-    <p class="description">
-        Введите свои данные
-    </p>
-
-    <form method="post">
-        @Html.AntiForgeryToken()
-
-        <div class="form-group">
-            <label>Имя-фамилия:</label>
-            <input type="text" name="Name" placeholder="Введите имя" required>
-        </div>
-
-        <div class="form-group">
-            <label>Номер телефона:</label>
-            <input type="tel" name="Phone" placeholder="+7" required>
-        </div>
-
-        <div class="form-group">
-            <label>Email:</label>
-            <input type="email" name="Email" placeholder="email@example.com" required>
-        </div>
-
-        <div class="form-group">
-            <label>Специальность:</label>
-
-            <div class="speciality">
-
-                <input type="radio" name="Speciality" value="Программирование" id="dev">
-                <label for="dev">Программирование</label>
-
-                <br>
-
-                <input type="radio" name="Speciality" value="Дизайн" id="design">
-                <label for="design">Дизайн</label>
-
-                <br>
-
-                <input type="radio" name="Speciality" value="Маркетинг" id="marketing">
-                <label for="marketing">Маркетинг</label>
-
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="courses">Курс:</label>
-            <select name="Course" id="courses">
-                <option value="1 курс">1 курс</option>
-                <option value="2 курс">2 курс</option>
-                <option value="3 курс">3 курс</option>
-                <option value="4 курс">4 курс</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="">Дата рождения:</label>
-            <input type="date" name="BirthDate" required>
-        </div>
-        <div class="form-group">
-            <label for="">Технологии:</label>
-            <div class="speciality">
-                <input type="checkbox" name="Technologies" value="HTML/CSS" id="html">
-                <label for="html">HTML/CSS</label>
-                <br>
-                <input type="checkbox" name="Technologies" value="JavaScript" id="js">
-                <label for="js">JavaScript</label>
-                <br>
-                <input type="checkbox" name="Technologies" value="C#" id="csharp">
-                <label for="csharp">C#</label>
-                <br>
-                <input type="checkbox" name="Technologies" value="Python" id="python">
-                <label for="python">Python</label>
-            </div>
-        </div>
-        <button class="form-button" type="submit">
-            Отправить
-        </button>
-        <button class="clear-button" type="reset">Очистить</button>
-    </form>
-
-    <div id="status" class="status"></div>
-
-    @* КАРТОЧКА ПОСЛЕДНЕГО ДОБАВЛЕННОГО СТУДЕНТА *@
-    <div id="result" class="student-card">
-
-        <div class="student-card-header">
-            <h2>Анкета отправлена</h2>
-            <p>Данные студента</p>
-        </div>
-
-        <div class="student-info">
-            <div class="info-item">
-                <span>Имя</span>
-                <strong id="result-name"></strong>
-            </div>
-            <div class="info-item">
-                <span>Телефон</span>
-                <strong id="result-phone"></strong>
-            </div>
-            <div class="info-item">
-                <span>Email</span>
-                <strong id="result-email"></strong>
-            </div>
-            <div class="info-item">
-                <span>Специальность</span>
-                <strong id="result-speciality"></strong>
-            </div>
-            <div class="info-item">
-                <span>Курс</span>
-                <strong id="result-course"></strong>
-            </div>
-            <div class="info-item">
-                <span>Дата рождения</span>
-                <strong id="result-birthdate"></strong>
-            </div>
-            <div class="info-item">
-                <span>Технологии</span>
-                <strong id="result-technologies"></strong>
-            </div>
-        </div>
-
+<div style="max-width: 700px; margin: 0 auto; padding-top: 2rem;">
+    
+    <div style="margin-bottom: 2rem; text-align: left;">
+        <h1 style="font-size: 2.2rem; font-weight: 800; margin: 0 0 0.5rem 0;">Анкета студента</h1>
+        <p style="color: #6b7280; font-size: 1.1rem; margin: 0;">Введите свои данные</p>
     </div>
 
-    @if (Model.Message != null)
-    {
-        <div class="result">
-            <h3>Данные анкеты:</h3>
+    <div class="resume-card" style="padding: 2.5rem;">
+        <form method="post">
+            
+            <div class="form-group">
+                <label asp-for="NewStudent.Name" class="form-label">Имя-фамилия:</label>
+                <input asp-for="NewStudent.Name" class="form-control" placeholder="Введите имя" required />
+            </div>
 
-            <p style="white-space: pre-line;">
-                @Model.Message
-            </p>
-        </div>
-    }
+            <div class="form-group">
+                <label asp-for="NewStudent.Phone" class="form-label">Номер телефона:</label>
+                <input asp-for="NewStudent.Phone" class="form-control" placeholder="+7" required />
+            </div>
 
-    @* СПИСОК ВСЕХ СТУДЕНТОВ *@
-    <div class="students-section">
-        <h2>Список студентов</h2>
-        <div id="students-list"></div>
+            <div class="form-group">
+                <label asp-for="NewStudent.Email" class="form-label">Email:</label>
+                <input asp-for="NewStudent.Email" type="email" class="form-control" placeholder="email@example.com" required />
+            </div>
+
+            <div class="form-group">
+                <label class="form-label d-block">Специальность:</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" asp-for="NewStudent.Speciality" value="Программирование" id="spec1" checked>
+                    <label class="form-check-label" for="spec1">Программирование</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" asp-for="NewStudent.Speciality" value="Дизайн" id="spec2">
+                    <label class="form-check-label" for="spec2">Дизайн</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" asp-for="NewStudent.Speciality" value="Маркетинг" id="spec3">
+                    <label class="form-check-label" for="spec3">Маркетинг</label>
+                </div>
+            </div>
+
+            <!-- Курс -->
+            <div class="form-group">
+                <label class="form-label">Курс:</label>
+                <select name="NewStudent.Course" class="form-control">
+                    <option value="1 курс">1 курс</option>
+                    <option value="2 курс">2 курс</option>
+                    <option value="3 курс">3 курс</option>
+                    <option value="4 курс">4 курс</option>
+                </select>
+            </div>
+
+            <!-- Дата рождения -->
+            <div class="form-group">
+                <label asp-for="NewStudent.BirthDate" class="form-label">Дата рождения:</label>
+                <input asp-for="NewStudent.BirthDate" type="date" class="form-control" />
+            </div>
+
+            <!-- Технологии (чекбоксы) -->
+            <div class="form-group">
+                <label class="form-label d-block">Технологии:</label>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="NewStudent.Technologies" value="C#" id="tech1">
+                        <label class="form-check-label" for="tech1">C#</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="NewStudent.Technologies" value="HTML/CSS" id="tech2">
+                        <label class="form-check-label" for="tech2">HTML/CSS</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="NewStudent.Technologies" value="JavaScript" id="tech3">
+                        <label class="form-check-label" for="tech3">JavaScript</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="NewStudent.Technologies" value="Python" id="tech4">
+                        <label class="form-check-label" for="tech4">Python</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Город (Выпадающий список) -->
+            <div class="form-group">
+                <label class="form-label">Город:</label>
+                <select name="NewStudent.City" class="form-control">
+                    <option value="Москва">Москва</option>
+                    <option value="Санкт-Петербург">Санкт-Петербург</option>
+                    <option value="Казань">Казань</option>
+                    <option value="Екатеринбург">Екатеринбург</option>
+                    <option value="Новосибирск">Новосибирск</option>
+                </select>
+            </div>
+
+            <!-- Языки (Выпадающий список) -->
+            <div class="form-group">
+                <label class="form-label">Языки:</label>
+                <select name="NewStudent.Lang" class="form-control">
+                    <option value="Английский B1">Английский B1</option>
+                    <option value="Английский B2">Английский B2</option>
+                    <option value="Английский C1">Английский C1</option>
+                </select>
+            </div>
+
+            <!-- Форма обучения (Выпадающий список) -->
+            <div class="form-group">
+                <label class="form-label">Форма обучения:</label>
+                <select name="NewStudent.FormStudy" class="form-control">
+                    <option value="Очная">Очная</option>
+                    <option value="Заочная">Заочная</option>
+                    <option value="Очно-заочная">Очно-заочная</option>
+                </select>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 2rem;">
+                <label asp-for="NewStudent.Info" class="form-label">О себе:</label>
+                <textarea asp-for="NewStudent.Info" class="form-control" rows="3" placeholder="Дополнительная информация..."></textarea>
+            </div>
+
+            <!-- Кнопки -->
+            <div style="display: flex; gap: 1rem;">
+                <button type="submit" class="btn btn-primary" style="flex: 1; padding: 0.8rem; font-size: 1.1rem;">Сохранить анкету</button>
+                <button type="reset" class="btn btn-secondary" style="padding: 0.8rem 1.5rem; font-size: 1.1rem;">Очистить</button>
+            </div>
+        </form>
     </div>
 </div>
-
-<script>
-    @* НАХОДИМ ЭЛЕМЕНТЫ СТРАНИЦЫ - ФОРМА, КНОПКА, СТАТУС *@
-    const form = document.querySelector("form");
-    const button = form.querySelector("button[type='submit']");
-    const status = document.querySelector("#status");
-    const studentsList = document.querySelector("#students-list");
- 
-    @* ОТПРАВКА ФОРМЫ *@
-        form.addEventListener("submit", async function (event) {
-            event.preventDefault();
-
-            button.textContent = "Отправка..."
-            button.disabled = true;
-
-            const formData = new FormData(form);
-
-            try {
-                const response = await fetch("", {
-                    method: "POST",
-                    body: formData
-                });
-
-                if (!response.ok) {
-                    throw new Error("Ошибка сервера");
-                }
-
-                const data = await response.json();
-                console.log(data);
-                await new Promise(resolve => setTimeout(resolve, 1500));
-
-                @* ПОДСТАВЛЯЕМ ДАННЫЕ ПОСЛЕДНЕГО ДОБАВЛЕННОГО СТУДЕНТА *@
-                document.querySelector("#result-name").textContent = data.name;
-                document.querySelector("#result-phone").textContent = data.phone;
-                document.querySelector("#result-email").textContent = data.email;
-                document.querySelector("#result-speciality").textContent = data.speciality;
-                document.querySelector("#result-course").textContent = data.course;
-                document.querySelector("#result-birthdate").textContent = data.birthDate;
-                document.querySelector("#result-technologies").textContent = data.technologies;
-
-                @* ПОКАЗЫВАЕМ АНКЕТУ СТУДЕНТА ЧЕРЕЗ СТИЛЬ DISPLAY: BLOCK *@
-                    document.querySelector("#result").style.display = "block";
-                status.textContent = "Анкета успешно отправлена";
-            
-                @* ОБНОВЛЯЕМ СПИСОК СТУДЕНТОВ *@
-                    await loadStudents();
-
-                @* ОЧИЩАЕМ ФОРМУ *@
-                    form.reset();
-            } catch (error) {
-                console.error(error)
-                status.textContent = "Не удалось отправить анкету";
-            } finally {
-                button.disabled = false;
-                button.textContent = "Отправить";
-            }
-        });
-
-    @* ПОЛУЧЕНИЕ СПИСКА СТУДЕНТОВ *@
-        async function loadStudents() {
-            try {
-                const response = await fetch("?handler=Students");
-
-                if (!response.ok) {
-                    throw new Error("Ошибка загрузки студентов")
-                };
-            
-                const students = await response.json()
-
-                @* ОЧИЩАЕМ СТАРЫЙ СПИСОК *@
-                    studentsList.innerHTML = "";
-
-                students.forEach(student => {
-                    const card = document.createElement("div");
-                    card.className = "student-card";
-                    card.innerHTML = `
-                    <div class="student-card-header">
-                        <div>
-                            <h2>
-                                ${student.name}
-                            </h2>
-                            <p>
-                                ${student.speciality}
-                            </p>
-                        </div>
-                    </div>
-                    <div class="student-info">
-                        <div class="info-item">
-                            <span>
-                                Телефон: 
-                            </span>
-                            <strong>
-                                ${student.phone}
-                            </strong>
-                        </div>
-                        <div class="info-item">
-                            <span>
-                                Email: 
-                            </span>
-                            <strong>
-                                ${student.email}
-                            </strong>
-                        </div>
-                        <div class="info-item">
-                            <span>
-                                Курс: 
-                            </span>
-                            <strong>
-                                ${student.course}
-                            </strong>
-                        </div>
-                        <div class="info-item">
-                            <span>
-                                Дата рождения: 
-                            </span>
-                            <strong>
-                                ${student.birthDate}
-                            </strong>
-                        </div>
-                        <div class="info-item">
-                            <span>
-                                Технологии: 
-                            </span>
-                            <strong>
-                                ${student.technologies.join(", ")}
-                            </strong>
-                        </div>
-                    </div>
-                    <button 
-                        class="delete-button" 
-                        onclick="deleteStudent(${student.id})">
-                        Удалить
-                    </button>
-                    `;
-
-                    studentsList.appendChild(card);
-
-                });
-            } catch (error) {
-                console.error(error);
-                studentsList.innerHTML = `
-                <div class="result">
-                Не удалось загрузить список студентов
-                </div>
-                `;
-
-            }
-        }
-
-    @* УДАЛЕНИЕ АНКЕТЫ СТУДЕНТА *@
-        async function deleteStudent(id) {
-            try {
-                const token = document.querySelector(
-                    'input[name="__RequestVerificationToken"]'
-                ).value;
-
-                const response = await fetch("?handler=Delete&id=" + id, {
-                    method: "POST",
-                    headers: {
-                        "RequestVerificationToken": token
-                    }
-                });
-
-                if (!response.ok) {
-                    throw new Error("Ошибка удаления");
-                }
-
-                const result = await response.json();
-
-                if (result.success) {
-                    status.textContent = "Анкета студента удалена";
-                    await loadStudents();
-                }
-
-            } catch (error) {
-                console.error(error);
-                status.textContent = "Не удалось удалить анкету студента";
-            }
-        }
-
-    @* ОЧИСТКА ФОРМЫ *@
-        form.addEventListener("reset", function () {
-            document.querySelector('#result').style.display = 'none';
-            document.querySelector('#status').textContent = '';
-        })
-    @* ЗАГРУЗКА СПИСКА ПРИ ОТКРЫТИИ *@
-        loadStudents();
-
-</script>

@@ -1,80 +1,30 @@
-using System;
-using System.Text.Json;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using aspnetWebApp.Models;
 
-namespace aspnetWebApp.Pages;
-
-public class IndexModel : PageModel
+namespace aspnetWebApp.Pages
 {
-    [BindProperty]
-    public string Name { get; set; } = "";
-    [BindProperty]
-    public string Phone { get; set; } = "";
-    [BindProperty]
-    public string Email { get; set; } = "";
-    [BindProperty]
-    public string Speciality { get; set; } = "";
-    [BindProperty]
-    public string Course { get; set; } = "";
-    [BindProperty]
-    public string BirthDate { get; set; } = "";
-    [BindProperty]
-    public string[] Technologies { get; set; } = Array.Empty<string>();
-    [BindProperty]
-    public string City {get; set;} = "";
-    [BindProperty]
-    public string Lang {get; set;} = "";
-    [BindProperty]
-    public string FormStudy {get; set;} = "";
-    [BindProperty]
-    public string Info {get; set; } = "";
-    public string Message { get; set; }
-    public static List<Student> Students { get; set; } = new();
-    public void OnGet()
+    public class IndexModel : PageModel
     {
-        // Message = "Привет! Сообщение от C#";
+        // Общий список для сохранения резюме в памяти
+        public static List<Student> StudentsList { get; set; } = new List<Student>();
+
+        public void OnGet() { }
     }
-    public IActionResult OnPost() {
 
-        string technologies = Technologies.Length > 0
-            ? string.Join(", ", Technologies)
-            : "Не выбраны";
-
-        var student = new Student {
-            Id = Students.Any() ? Students.Max(x => x.Id) + 1 : 1,
-            Name = Name,
-            Phone = Phone,
-            Email = Email,
-            Speciality = Speciality,
-            Course = Course,
-            BirthDate = BirthDate,
-            Technologies = Technologies,
-            City = City,
-            Lang = Lang,
-            FormStudy = FormStudy,
-            Info = Info
-        };
-
-        Students.Add(student);
+    // Модель студента
+    public class Student
+    {
+        public int Id { get; set; } = new Random().Next(1, 10000);
+        public string Name { get; set; } = string.Empty;
+        public string Phone { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string Speciality { get; set; } = string.Empty;
+        public string Course { get; set; } = string.Empty;
+        public string BirthDate { get; set; } = string.Empty;
         
-        // return Content(JsonSerializer.Serialize(student),
-        // "application/json");
-        return new JsonResult(student);
-    }
-
-    public IActionResult OnPostDelete(int Id) {
-        var student = Students.FirstOrDefault(x => x.Id == Id);
-        if(student == null) {
-            return new JsonResult(new{
-                success = false,
-                message = "Студент не найден"
-            });
-        }
-        Students.Remove(student);
-        return new JsonResult(new {
-            success = true
-        });
+        public List<string> Technologies { get; set; } = new List<string>();
+        public string City { get; set; } = string.Empty;
+        public string Lang { get; set; } = string.Empty;
+        public string FormStudy { get; set; } = string.Empty;
+        public string Info { get; set; } = string.Empty;
     }
 }
